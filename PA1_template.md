@@ -22,14 +22,13 @@ Reading in the zipped data directly from the repo:
 data <- read.csv(unz("activity.zip", "activity.csv"))
 ```
 
-and changing the date column to dates (using the ymd function from lubridate)
-and converting the intervals to factors:  
+and changing the date column to dates (using the ymd function from lubridate):
 
 
 ```r
 data$date <- ymd(data$date)
-data$interval <- as.factor(data$interval)
 ```
+  
 (the intervals are coded in the following way:
 last two digits represent minutes into the hour
 beginning indicates the hour of the day;  
@@ -92,7 +91,7 @@ stepsperinterval <- data %>%
 We can then plot the number of steps per interval:
 
 ```r
-plot(x= as.numeric(as.character(stepsperinterval$interval)),
+plot(x= stepsperinterval$interval,
      y= stepsperinterval$avg_steps, 
      type = "l",
      main = "number of steps during an average day",
@@ -123,7 +122,6 @@ stepsperinterval$interval[indexmaxinterval]
 
 ```
 ## [1] 835
-## 288 Levels: 0 5 10 15 20 25 30 35 40 45 50 55 100 105 110 115 120 ... 2355
 ```
 Hence, at the 104th's interval, corresponding to
 835, at 8:35 am, most steps are
@@ -138,14 +136,14 @@ summary(data)
 ```
 
 ```
-##      steps             date               interval    
-##  Min.   :  0.00   Min.   :2012-10-01   0      :   61  
-##  1st Qu.:  0.00   1st Qu.:2012-10-16   5      :   61  
-##  Median :  0.00   Median :2012-10-31   10     :   61  
-##  Mean   : 37.38   Mean   :2012-10-31   15     :   61  
-##  3rd Qu.: 12.00   3rd Qu.:2012-11-15   20     :   61  
-##  Max.   :806.00   Max.   :2012-11-30   25     :   61  
-##  NA's   :2304                          (Other):17202
+##      steps             date               interval     
+##  Min.   :  0.00   Min.   :2012-10-01   Min.   :   0.0  
+##  1st Qu.:  0.00   1st Qu.:2012-10-16   1st Qu.: 588.8  
+##  Median :  0.00   Median :2012-10-31   Median :1177.5  
+##  Mean   : 37.38   Mean   :2012-10-31   Mean   :1177.5  
+##  3rd Qu.: 12.00   3rd Qu.:2012-11-15   3rd Qu.:1766.2  
+##  Max.   :806.00   Max.   :2012-11-30   Max.   :2355.0  
+##  NA's   :2304
 ```
 
 The assigned task was to replace the missing values with computed values.  
